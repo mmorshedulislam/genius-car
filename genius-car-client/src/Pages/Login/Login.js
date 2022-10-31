@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import img from "../../assets/images/login/login.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
+import { FaFacebook, FaGoogle, FaLinkedin } from "react-icons/fa";
 
 const Login = () => {
   const { logInWithEmailPassword } = useContext(AuthContext);
@@ -17,6 +16,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        form.reset()
       })
       .catch((err) => console.log(err));
   };
@@ -66,8 +66,16 @@ const Login = () => {
               Sign Up
             </Link>
           </p>
-          <p>
-            <FontAwesomeIcon icon={faCoffee} />
+          <p className="flex justify-center text-3xl">
+            <span className="border border-orange-300 rounded-full p-3">
+              <FaFacebook />
+            </span>
+            <span className="border border-orange-300 rounded-full p-3 mx-3">
+              <FaGoogle />
+            </span>
+            <span className="border border-orange-300 rounded-full p-3 ">
+              <FaLinkedin />
+            </span>
           </p>
         </div>
       </div>

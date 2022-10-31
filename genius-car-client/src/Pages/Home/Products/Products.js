@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ProductItem from "./ProductItem";
+import ProductCard from "./ProductCard";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -20,7 +20,7 @@ const Products = () => {
       </div>
       <div className="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {products.map((product) => (
-          <ProductItem key={product.id} product={product}></ProductItem>
+          <ProductCard key={product.id} product={product}></ProductCard>
         ))}
       </div>
       <div className="w-48 mx-auto my-10">

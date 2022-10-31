@@ -5,7 +5,7 @@ import { FaFacebook, FaGoogle, FaLinkedin } from "react-icons/fa";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUser } = useContext(AuthContext);
 
   const handleSignUp = (event) => {
     event.preventDefault();
@@ -14,14 +14,24 @@ const SignUp = () => {
     const photoURL = form.photoURL.value;
     const email = form.email.value;
     const password = form.password.value;
-    const confirm = form.confirm.value;
+    // const confirm = form.confirm.value;
     // signUp(email, password);
-    
+
     createUser(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
-        form.reset()
+        profileUpdate(name, photoURL);
+        form.reset();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const profileUpdate = (name, photoURL) => {
+    const profile = { displayName: name, photoURL: photoURL };
+    updateUser(profile)
+      .then(() => {
+        alert("Profile updated");
       })
       .catch((err) => console.log(err));
   };
@@ -106,14 +116,14 @@ const SignUp = () => {
               Login
             </Link>
           </p>
-          <p>
-            <span>
+          <p className="flex justify-center text-3xl">
+            <span className="border border-orange-300 rounded-full p-3">
               <FaFacebook />
             </span>
-            <span>
+            <span className="border border-orange-300 rounded-full p-3 mx-3">
               <FaGoogle />
             </span>
-            <span>
+            <span className="border border-orange-300 rounded-full p-3">
               <FaLinkedin />
             </span>
           </p>
