@@ -2,9 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import img from "../../assets/images/login/login.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee, faFacebook } from "@fortawesome/free-solid-svg-icons";
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
+    const handleLogin = event => {
+        event.preventDefault()
+    }
   return (
     <div className="hero">
       <div className="grid grid-cols-2 gap-20 hero-content flex-col lg:flex-row my-20">
@@ -13,7 +16,7 @@ const Login = () => {
         </div>
         <div className="card flex-shrink-0 p-5 w-full shadow-2xl bg-base-100">
           <h1 className="text-5xl font-bold text-center">Login</h1>
-          <form className="card-body">
+          <form onSubmit={handleLogin} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
