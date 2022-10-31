@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import img from '../../assets/images/login/login.svg'
+import img from "../../assets/images/login/login.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoffee, faFacebook } from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
   return (
@@ -40,10 +42,17 @@ const Login = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-                <input type="submit" className="btn btn-primary" value="Login" />
+              <input type="submit" className="btn btn-primary" value="Login" />
             </div>
-            <p className="text-center my-5">New to Genius Car? <Link className="text-orange-600" to={'/signup'}>Sign Up</Link></p>
           </form>
+          <p className="text-center my-5">
+            New to Genius Car?{" "}
+            <Link className="text-orange-600" to={"/signup"}>
+              Sign Up
+            </Link>
+          </p>
+          <p><FontAwesomeIcon icon={faCoffee}/></p>
+          <FontAwesomeIcon icon="fa-brands fa-facebook" />
         </div>
       </div>
     </div>
