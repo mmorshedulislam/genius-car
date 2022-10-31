@@ -1,0 +1,9 @@
+[
+    {"id": 1, "name": "Car Engine Plug", "price": 20.00, "img": "https://i.ibb.co/qyzCLBC/1.png"},
+    {"id": 2, "name": "Car Air Filter", "price": 20.00, "img": "https://i.ibb.co/fGQjnbp/2.png"},
+    {"id": 3, "name": "Cools Led Light", "price": 20.00, "img": "https://i.ibb.co/Bf3vWGz/3.png"},
+    {"id": 4, "name": "Cools Led Light", "price": 20.00, "img": "https://i.ibb.co/jwHVS0T/4.png"},
+    {"id": 5, "name": "Car Engine Plug", "price": 20.00, "img": "https://i.ibb.co/bB70ZgF/5.png"},
+    {"id": 6, "name": "Cools Led Light", "price": 20.00, "img": "https://i.ibb.co/9qkBsSM/6.png"}
+]
+

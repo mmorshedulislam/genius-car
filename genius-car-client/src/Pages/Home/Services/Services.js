@@ -12,7 +12,7 @@ const Services = () => {
     }, [])
     return (
         <div className='my-10'>
-            <div className='text-center my-7  w-3/4 mx-auto'> 
+            <div className='text-center my-14  w-1/2 mx-auto'> 
                 <h2 className='text-xl text-orange-600'>Services</h2>
                 <h2 className='text-5xl font-bold my-3'>Our Service Area</h2>
                 <p >the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
