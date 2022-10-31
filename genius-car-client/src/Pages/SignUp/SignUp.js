@@ -1,13 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import img from "../../assets/images/login/login.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { FaFacebook, FaGoogle, FaLinkedin } from "react-icons/fa";
+import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const SignUp = () => {
-    const handleSignUp = event => {
-        event.preventDefault()
-    }
+  const { createUser } = useContext(AuthContext);
+
+  const handleSignUp = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const photoURL = form.photoURL.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirm = form.confirm.value;
+    // signUp(email, password);
+    
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const signUp = (email, password) => {
+
+  };
   return (
     <div className="hero">
       <div className="grid grid-cols-2 gap-20 hero-content flex-col lg:flex-row my-20">
@@ -90,9 +110,16 @@ const SignUp = () => {
             </Link>
           </p>
           <p>
-            <FontAwesomeIcon icon={faCoffee} />
+            <span>
+              <FaFacebook />
+            </span>
+            <span>
+              <FaGoogle />
+            </span>
+            <span>
+              <FaLinkedin />
+            </span>
           </p>
-          <FontAwesomeIcon icon="fa-brands fa-facebook" />
         </div>
       </div>
     </div>
