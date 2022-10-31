@@ -21,12 +21,9 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        form.reset()
       })
       .catch((err) => console.log(err));
-  };
-
-  const signUp = (email, password) => {
-
   };
   return (
     <div className="hero">

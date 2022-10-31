@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import img from "../../assets/images/login/login.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const Login = () => {
-    const handleLogin = event => {
-        event.preventDefault()
-    }
+  const { logInWithEmailPassword } = useContext(AuthContext);
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    logInWithEmailPassword(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="hero">
       <div className="grid grid-cols-2 gap-20 hero-content flex-col lg:flex-row my-20">
@@ -54,8 +66,9 @@ const Login = () => {
               Sign Up
             </Link>
           </p>
-          <p><FontAwesomeIcon icon={faCoffee}/></p>
-          <FontAwesomeIcon icon="fa-brands fa-facebook" />
+          <p>
+            <FontAwesomeIcon icon={faCoffee} />
+          </p>
         </div>
       </div>
     </div>
