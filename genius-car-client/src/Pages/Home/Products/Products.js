@@ -23,6 +23,9 @@ const Products = () => {
           <ProductItem key={product.id} product={product}></ProductItem>
         ))}
       </div>
+      <div className="w-48 mx-auto my-10">
+        <button className="py-3 px-4 font-bold bg-orange-500 text-white rounded">More Products</button>
+      </div>
     </div>
   );
 };
