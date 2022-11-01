@@ -56,7 +56,7 @@ const Header = () => {
       </div>
 
       <div className="navbar-end">
-        <button className="btn btn-warning btn-outline">Appointment</button>
+        <button className="btn btn-warning btn-outline">Appointment {user?.displayName}</button>
       </div>
     </div>
   );

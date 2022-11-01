@@ -5,7 +5,7 @@ import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 import { FaFacebook, FaGoogle, FaLinkedin } from "react-icons/fa";
 
 const Login = () => {
-  const { logInWithEmailPassword } = useContext(AuthContext);
+  const { logInWithEmailPassword, signInWithGoogle, signInWithGithub } = useContext(AuthContext);
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -16,10 +16,29 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        form.reset()
+        form.reset();
       })
       .catch((err) => console.log(err));
   };
+
+  const GoogleLogin = () => {
+    signInWithGoogle()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const GithubLogin = () => {
+    signInWithGithub()
+    .then((result) => {
+      const user = result.user; 
+      console.log(user);
+    })
+    .catch(err => console.log(err))
+  }
+
   return (
     <div className="hero">
       <div className="grid grid-cols-2 gap-20 hero-content flex-col lg:flex-row my-20">
@@ -70,10 +89,10 @@ const Login = () => {
             <span className="border border-orange-300 rounded-full p-3">
               <FaFacebook />
             </span>
-            <span className="border border-orange-300 rounded-full p-3 mx-3">
+            <button onClick={GoogleLogin} className="border border-orange-300 rounded-full p-3 mx-3">
               <FaGoogle />
-            </span>
-            <span className="border border-orange-300 rounded-full p-3 ">
+            </button>
+            <span onClick={GithubLogin} className="border border-orange-300 rounded-full p-3 ">
               <FaLinkedin />
             </span>
           </p>
