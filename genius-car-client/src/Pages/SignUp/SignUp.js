@@ -17,6 +17,26 @@ const SignUp = () => {
     // const confirm = form.confirm.value;
     // signUp(email, password);
 
+    const user = {
+      name, 
+      photoURL, 
+      email, 
+      password, 
+    }
+  
+    fetch(`http://localhost:5000/users`, {
+      method: 'POST', 
+      headers: {
+        'content-type': 'application/json'
+      }, 
+      body: JSON.stringify(user)
+    })
+    .then(() => {
+      alert('User data stored in DB')
+    })
+    .catch(err => console.log(err))
+
+    
     createUser(email, password)
       .then((result) => {
         const user = result.user;
@@ -35,6 +55,8 @@ const SignUp = () => {
       })
       .catch((err) => console.log(err));
   };
+
+
   return (
     <div className="hero">
       <div className="grid grid-cols-2 gap-20 hero-content flex-col lg:flex-row my-20">

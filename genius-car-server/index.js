@@ -26,6 +26,7 @@ async function run() {
   try {
     const serviceCollection = client.db("geniusCar").collection("services");
     const orderCollection = client.db("geniusCar").collection("orders");
+    const userCollection = client.db("geniusCar").collection('users')
 
     // find all
     app.get("/services", async (req, res) => {
@@ -65,6 +66,7 @@ async function run() {
       res.send(result);
     });
 
+    // update some info
     app.patch("/orders/:id", async (req, res) => {
       const id = req.params.id;
       const status = req.body.status;
@@ -84,6 +86,15 @@ async function run() {
       const result = await orderCollection.deleteOne(query);
       res.send(result);
     });
+
+    // users collect
+    app.post('/users', async(req, res) => {
+      const user = req.body; 
+      const result = await userCollection.insertOne(user)
+      res.send(result)  
+    })
+
+    // get user data
   } finally {
   }
 }
