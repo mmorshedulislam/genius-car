@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
 
-const OrderRow = ({ order }) => {
-  const { serviceName, phone, customer, price, serviceId, email, message } =
-    order;
+const OrderRow = ({ order, handleDelete, handleUpdateStatus }) => {
+  const {
+    _id,
+    serviceName,
+    phone,
+    customer,
+    price,
+    serviceId,
+    email,
+    message,
+    status
+  } = order;
   const [orderService, setOrderService] = useState({});
 
   useEffect(() => {
@@ -10,10 +19,11 @@ const OrderRow = ({ order }) => {
       .then((res) => res.json())
       .then((data) => setOrderService(data));
   }, [serviceId]);
+
   return (
     <tr>
       <th>
-        <button className="btn btn-circle">
+        <button onClick={() => handleDelete(_id)} className="btn btn-circle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-4 w-4"
@@ -55,7 +65,12 @@ const OrderRow = ({ order }) => {
       </td>
       <td>{email}</td>
       <th>
-        <button className="btn btn-ghost btn-xs">{message}</button>
+        <button
+          onClick={() => handleUpdateStatus(_id)}
+          className="btn btn-ghost btn-xs"
+        >
+          {status ? status : "Pending"}
+        </button>
       </th>
     </tr>
   );

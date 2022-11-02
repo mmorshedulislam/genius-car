@@ -10,12 +10,21 @@ const Header = () => {
       <li className="font-semibold">
         <Link to="/">Home</Link>
       </li>
-      <li className="font-semibold">
-        <Link to="/login">Login</Link>
-      </li>
-      <li className="font-semibold">
-        <Link to="/signup">Sign Up</Link>
-      </li>
+
+      {!user?.email ? (
+        <li className="font-semibold">
+          <Link to="/login">Login</Link>
+        </li>
+      ) : (
+        <>
+          <li className="font-semibold">
+            <Link to="/orders">Orders</Link>
+          </li>
+          <li className="font-semibold">
+            <button>Sign Out</button>
+          </li>
+        </>
+      )}
     </>
   );
   return (
@@ -56,7 +65,9 @@ const Header = () => {
       </div>
 
       <div className="navbar-end">
-        <button className="btn btn-warning btn-outline">Appointment {user?.displayName}</button>
+        <button className="btn btn-warning btn-outline">
+          Appointment {user?.displayName}
+        </button>
       </div>
     </div>
   );
