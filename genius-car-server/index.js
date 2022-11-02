@@ -95,6 +95,12 @@ async function run() {
     })
 
     // get user data
+    app.get('/users', async (req, res) => {
+      const query = {}
+      const cursor = userCollection.find(query)
+      const result = await cursor.toArray()
+      res.send(result)
+    })
   } finally {
   }
 }
