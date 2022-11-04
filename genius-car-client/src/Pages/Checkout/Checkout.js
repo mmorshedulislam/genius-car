@@ -30,7 +30,7 @@ const Checkout = () => {
       return alert("Please Phone number should be 10 characters");
     } */
 
-    fetch(`http://localhost:5000/orders`, {
+    fetch(`https://genius-car-server-five.vercel.app/orders`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

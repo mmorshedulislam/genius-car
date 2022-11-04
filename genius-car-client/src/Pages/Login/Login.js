@@ -2,11 +2,10 @@ import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import img from "../../assets/images/login/login.svg";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
-import { FaFacebook, FaGoogle, FaLinkedin } from "react-icons/fa";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
-  const { logInWithEmailPassword, signInWithGoogle, signInWithGithub } =
-    useContext(AuthContext);
+  const { logInWithEmailPassword } = useContext(AuthContext);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -24,7 +23,7 @@ const Login = () => {
         const currentUser = {
           email: user.email,
         };
-        fetch("http://localhost:5000/jwt", {
+        fetch("https://genius-car-server-five.vercel.app/jwt", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -40,26 +39,6 @@ const Login = () => {
           });
 
         form.reset();
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const GoogleLogin = () => {
-    signInWithGoogle()
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        navigate(from, { replace: true });
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const GithubLogin = () => {
-    signInWithGithub()
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        navigate(from, { replace: true });
       })
       .catch((err) => console.log(err));
   };
@@ -110,23 +89,7 @@ const Login = () => {
               Sign Up
             </Link>
           </p>
-          <p className="flex justify-center text-3xl">
-            <span className="border border-orange-300 rounded-full p-3">
-              <FaFacebook />
-            </span>
-            <button
-              onClick={GoogleLogin}
-              className="border border-orange-300 rounded-full p-3 mx-3"
-            >
-              <FaGoogle />
-            </button>
-            <span
-              onClick={GithubLogin}
-              className="border border-orange-300 rounded-full p-3 "
-            >
-              <FaLinkedin />
-            </span>
-          </p>
+          <SocialLogin></SocialLogin>
         </div>
       </div>
     </div>

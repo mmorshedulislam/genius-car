@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import img from "../../assets/images/login/login.svg";
-import { FaFacebook, FaGoogle, FaLinkedin } from "react-icons/fa";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const SignUp = () => {
   const { createUser, updateUser } = useContext(AuthContext);
@@ -18,25 +18,24 @@ const SignUp = () => {
     // signUp(email, password);
 
     const user = {
-      name, 
-      photoURL, 
-      email, 
-      password, 
-    }
-  
-    fetch(`http://localhost:5000/users`, {
-      method: 'POST', 
-      headers: {
-        'content-type': 'application/json'
-      }, 
-      body: JSON.stringify(user)
-    })
-    .then(() => {
-      alert('User data stored in DB')
-    })
-    .catch(err => console.log(err))
+      name,
+      photoURL,
+      email,
+      password,
+    };
 
-    
+    fetch(`https://genius-car-server-five.vercel.app/users`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then(() => {
+        alert("User data stored in DB");
+      })
+      .catch((err) => console.log(err));
+
     createUser(email, password)
       .then((result) => {
         const user = result.user;
@@ -55,7 +54,6 @@ const SignUp = () => {
       })
       .catch((err) => console.log(err));
   };
-
 
   return (
     <div className="hero">
@@ -138,17 +136,7 @@ const SignUp = () => {
               Login
             </Link>
           </p>
-          <p className="flex justify-center text-3xl">
-            <span className="border border-orange-300 rounded-full p-3">
-              <FaFacebook />
-            </span>
-            <span className="border border-orange-300 rounded-full p-3 mx-3">
-              <FaGoogle />
-            </span>
-            <span className="border border-orange-300 rounded-full p-3">
-              <FaLinkedin />
-            </span>
-          </p>
+          <SocialLogin></SocialLogin>
         </div>
       </div>
     </div>
