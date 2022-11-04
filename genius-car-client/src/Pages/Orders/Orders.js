@@ -3,14 +3,26 @@ import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 import OrderRow from "./OrderRow";
 
 const Orders = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/orders?email=${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setOrders(data));
-  }, [user?.email]);
+    fetch(`http://localhost:5000/orders?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("geniusToken")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          return logOut();
+        }
+        return res.json();
+      })
+      .then((data) => {
+        // console.log('received', data);
+        setOrders(data);
+      });
+  }, [user?.email, logOut]);
 
   const handleDelete = (id) => {
     const proceed = window.confirm(
@@ -19,6 +31,9 @@ const Orders = () => {
     if (proceed) {
       fetch(`http://localhost:5000/orders/${id}`, {
         method: "DELETE",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("geniusToken")}`,
+        },
       })
         .then((res) => res.json())
         .then((data) => {
@@ -36,6 +51,7 @@ const Orders = () => {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("geniusToken")}`,
       },
       body: JSON.stringify({ status: "Approved" }),
     })

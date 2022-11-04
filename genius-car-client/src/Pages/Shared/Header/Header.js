@@ -7,10 +7,8 @@ const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const signOut = () => {
     logOut()
-    .then(() => {
-      alert('succefully logout.')
-    })
-    .catch(err => console.log(err))
+    .then()
+    .catch()
   }
   const menuItems = (
     <>

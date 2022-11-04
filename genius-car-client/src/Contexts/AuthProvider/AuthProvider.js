@@ -48,8 +48,9 @@ const AuthProvider = ({ children }) => {
   };
 
   const logOut = () => {
-    return signOut(auth)
-  }
+    localStorage.removeItem("geniusToken");
+    return signOut(auth);
+  };
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -69,7 +70,7 @@ const AuthProvider = ({ children }) => {
     signInWithGoogle,
     signInWithGithub,
     updateUser,
-    logOut
+    logOut,
   };
 
   return (

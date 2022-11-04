@@ -26,7 +26,7 @@ const Checkout = () => {
     console.log(order);
 
     // if needed validation
-/*     if (phone.length < 10) {
+    /*     if (phone.length < 10) {
       return alert("Please Phone number should be 10 characters");
     } */
 
@@ -34,14 +34,15 @@ const Checkout = () => {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("geniusToken")}`,
       },
       body: JSON.stringify(order),
     })
       .then((res) => res.json())
       .then((data) => {
-        if(data.acknowledged) {
-            alert('Order Placed Successfully.')
-            form.reset();
+        if (data.acknowledged) {
+          alert("Order Placed Successfully.");
+          form.reset();
         }
         console.log(data);
       });

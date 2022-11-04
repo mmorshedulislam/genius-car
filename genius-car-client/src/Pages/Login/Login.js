@@ -1,11 +1,17 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import img from "../../assets/images/login/login.svg";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 import { FaFacebook, FaGoogle, FaLinkedin } from "react-icons/fa";
 
 const Login = () => {
-  const { logInWithEmailPassword, signInWithGoogle, signInWithGithub } = useContext(AuthContext);
+  const { logInWithEmailPassword, signInWithGoogle, signInWithGithub } =
+    useContext(AuthContext);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -15,7 +21,24 @@ const Login = () => {
     logInWithEmailPassword(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        const currentUser = {
+          email: user.email,
+        };
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            // local storage is the easiest but not the best place to store JWT token
+            localStorage.setItem("geniusToken", data.token);
+            navigate(from, { replace: true });
+          });
+
         form.reset();
       })
       .catch((err) => console.log(err));
@@ -26,18 +49,20 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate(from, { replace: true });
       })
       .catch((err) => console.log(err));
   };
 
   const GithubLogin = () => {
     signInWithGithub()
-    .then((result) => {
-      const user = result.user; 
-      console.log(user);
-    })
-    .catch(err => console.log(err))
-  }
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate(from, { replace: true });
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="hero">
@@ -89,10 +114,16 @@ const Login = () => {
             <span className="border border-orange-300 rounded-full p-3">
               <FaFacebook />
             </span>
-            <button onClick={GoogleLogin} className="border border-orange-300 rounded-full p-3 mx-3">
+            <button
+              onClick={GoogleLogin}
+              className="border border-orange-300 rounded-full p-3 mx-3"
+            >
               <FaGoogle />
             </button>
-            <span onClick={GithubLogin} className="border border-orange-300 rounded-full p-3 ">
+            <span
+              onClick={GithubLogin}
+              className="border border-orange-300 rounded-full p-3 "
+            >
               <FaLinkedin />
             </span>
           </p>
